@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Gaurang Tandon</title>
+<style>
+    /* ---------------------------------- CSS START -------------------------------------- */
+    /* ------------------------------- BOX POSITIONING ----------------------------------- */
+#main_box {
+    border: 10px solid black;
+    width: 50vw;
+    height: 30vh;
+    margin: 0 auto;
+    margin-top: 5vh;
+    display: flex;
+    background-color: black;
+}
+.inner_box {
+    width: 20%;
+    margin: 0%;
+    margin-top: auto;
+    float: left;
+    height: 100%;
+    transition: height 1s ease-in-out;
+}
+/*------------------ DIFFERENT COLORS FOR DIFFERENT DIVS FOR ANIMATION -------------------*/
+#purple_box{
+    background-color: indigo;
+}
+#voilet_box{
+    background-color: mediumorchid;
+}
+#pink_box{
+    background-color: deeppink;
+}
+#orange_box{
+    background-color: sandybrown;
+}
+#yellow_box{
+    background-color: rgb(255, 195, 85);
+}
+/* --------------------------------- BUTTON STYLING ----------------------------------- */
+#button_div {
+    width: 50vw;
+    margin: 0 auto;
+    margin-top: 5vh;
+    text-align: center;
+}
+#start_button, #stop_button {
+    height: 4vh;
+    width: 15%;
+    color: white;
+    border: 0px none;
+}
+#start_button{
+    margin-right: 6vw;
+    background-color: green;
+}
+#stop_button{
+    margin-left: 6vw;
+    background-color: red;
+}
+    /* ---------------------------------- CSS END -------------------------------------- */
+</style>
+</head>
+<body>
+<!-------------------------------------- BODY START -------------------------------------->
+<div id = 'main_box'>
+    <!---------------------------------- COLOR BOXES ------------------------------------->
+    <div data-slidetoggle="#box1" id="purple_box" class="inner_box"></div>
+    <div id="voilet_box" class="inner_box"></div>
+    <div id="pink_box" class="inner_box"></div>
+    <div id="orange_box" class="inner_box"></div>
+    <div id="yellow_box" class="inner_box"></div>
+</div>
+<div id="button_div">
+    <!------------------------------------ BUTTONS --------------------------------------->
+    <button id="start_button" onclick="MainFunction(0)">Start</button>
+    <button id="stop_button" onclick="MainFunction(1)">Stop</button>
+</div>
+</body>
+<!-------------------------------------- BODY END ---------------------------------------->
+
+<script>
+/* -------------------------------- JAVASCRIPT START ----------------------------------- */
+
+
+// ------------------------------------- MAIN FUNCTION --------------------------------- //
+function begin() {
+    // ---- CREATING ARRAY ELEMENTS OF OBJECTS RETURNED BY document.getElementById ----- //
+    var boxes = [
+        purple_box = document.getElementById("purple_box"),
+        voilet_box = document.getElementById("voilet_box"),
+        pink_box = document.getElementById("pink_box"),
+        orange_box = document.getElementById("orange_box"),
+        yellow_box = document.getElementById("yellow_box")
+    ]
+    // ------- DEFINING FUNCTION FOR ANIMATION AND HEIGHT CHANGE OF COLOR BOXES ------- //
+    function change_height(box_name){
+        height_val = (Math.random() * 100)+"%"
+        return height_val
+    }
+    // --------- CALLING change_height FUNCTION ON ALL ELEMENTS OF BOXES ARRAY -------- //
+    var i;
+    for(i=0;i<boxes.length;i++){
+        boxes[i].style.height = change_height(boxes[i]);
+    }
+}
+
+// ----------------------- BUTTON FUNCTIONALITY/ANIMATION ----------------------------- //
+var intervalId;
+document.getElementById("start_button").onclick = function() {
+    // ----------------------- BUTTON BORDER ANIMATION -------------------------------- //
+    document.getElementById("start_button").style.border = "2px solid blue";
+    document.getElementById("start_button").style.borderRadius = "5px";
+    document.getElementById("stop_button").style.border = "none";
+    document.getElementById("stop_button").style.borderRadius = "0px";
+    // ---------------------- START BUTTON FUNCTIONALITY ----------------------------- //
+    if (intervalId) {
+        clearInterval(intervalId);
+    }
+    intervalId = setInterval(begin, 1000);
+};
+
+document.getElementById("stop_button").onclick = function() {
+    // ----------------------- BUTTON BORDER ANIMATION -------------------------------- //
+    document.getElementById("stop_button").style.border = "2px solid blue";
+    document.getElementById("stop_button").style.borderRadius = "5px";
+    document.getElementById("start_button").style.border = "none";
+    document.getElementById("start_button").style.borderRadius = "0px";
+    // ------------------------ STOP BUTTON FUNCTIONALITY ------------------------------//
+    clearInterval(intervalId);
+};
+
+/* --------------------------------- JAVASCRIPT END ----------------------------------- */
+</script>
+</html>
